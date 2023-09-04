@@ -1,0 +1,73 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="todo.css">
+    
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>To Do</title>
+</head>
+<body>
+      
+        <div class="container"> 
+            <textarea id="todoo" rows="4" name="task"  placeholder="ADD TO DO" class="form-control"></textarea>
+            <button  id="to"  name="button">ADD</button > 
+        </div>
+    <table>
+        <thead>
+             <tr>
+                <th>N</th>
+                <th>Task</th>
+                <th>ACTION</th>
+             </tr>
+        </thead>
+        <tbody id="body">
+
+        </tbody>
+        <tbody>
+            
+        </tbody>
+    </table> 
+     
+ </body>
+ <script>
+     document.getElementById('to').addEventListener('click', function(e){
+     var todo1 = document.getElementById('todoo').value;
+     if(todo1.length > 0){
+        todo(todo1);
+        document.getElementById('todoo').value = "";
+     }
+     })
+     
+     var todo = function(t){
+        $.ajax({
+             url:'write.php',
+             data:{'data':t},
+             success:function(result){
+                document.getElementById('body').innerHTML = result;
+            }
+         });
+     }
+     
+     {
+     $( document ).ready(function() {
+        $.ajax({
+             url:'show.php',
+             //data:{'data':t},
+             success:function(res){
+                document.getElementById('body').innerHTML = res;
+            }
+         });
+});
+     }      
+     
+ </script>
+ </html>
